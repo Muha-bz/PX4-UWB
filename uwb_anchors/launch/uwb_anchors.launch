@@ -1,0 +1,26 @@
+<launch>
+  <!-- Загрузка мира Gazebo с анкорами -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find clover_uwb_anchors)/worlds/uwb_anchors.world"/>
+    <arg name="paused" value="false"/>
+  </include>
+
+  <!-- Запуск ноды с трекингом позиции -->
+  <node name="uwb_position_tracker" pkg="clover_uwb_anchors" type="uwb_position_tracker.py" output="screen"/>
+  
+  <!-- Запуск плагинов анкоров -->
+  <node name="uwb_anchor1" pkg="clover_uwb_anchors" type="uwb_anchor_plugin.py" output="screen">
+    <param name="anchor_id" value="1"/>
+    <param name="position" value="[1.0, 0.0, 0.0]"/>
+  </node>
+  
+  <node name="uwb_anchor2" pkg="clover_uwb_anchors" type="uwb_anchor_plugin.py" output="screen">
+    <param name="anchor_id" value="2"/>
+    <param name="position" value=".0, 5.0, 0.5]"/>
+  </node>
+  
+  <node name="uwb_anchor3" pkg="clover_uwb_anchors" type="uwb_anchor_plugin.py" output="screen">
+    <param name="anchor_id" value="3"/>
+    <param name="position" value="[5.0, .0, 0.5]"/>
+  </node>
+</launch>
